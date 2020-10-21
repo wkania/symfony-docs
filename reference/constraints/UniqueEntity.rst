@@ -9,6 +9,10 @@ using an email address that already exists in the system.
 
     If you want to validate that all the elements of the collection are unique
     use the :doc:`Unique constraint </reference/constraints/Unique>`.
+    
+.. versionadded:: 5.2
+
+    Not entity (like DTO) field (or fields) validation against entities persisted in the database, was introduced in Symfony 5.2.
 
 ==========  ===================================================================
 Applies to  :ref:`class <validation-class-target>`
@@ -17,6 +21,7 @@ Options     - `em`_
             - `errorPath`_
             - `fields`_
             - `groups`_
+            - `identifierFieldNames`_
             - `ignoreNull`_
             - `message`_
             - `payload`_
@@ -260,6 +265,21 @@ If you need to require two fields to be individually unique (e.g. a unique
 each with a single field.
 
 .. include:: /reference/constraints/_groups-option.rst.inc
+
+
+identifierFieldNames
+~~~~~~~~~~
+
+**type**: ``array`` | ``string`` [:ref:`default option <validation-default-option>`]
+
+This optional option is the field (or list of fields) of identifier field names  
+that are defined in the entity set by the `entityClass`_ option.  
+  
+Use it only when the checked object is not an entity and you need to update an entity.
+
+.. versionadded:: 5.2
+
+    The option was introduced in Symfony 5.2.
 
 ignoreNull
 ~~~~~~~~~~
