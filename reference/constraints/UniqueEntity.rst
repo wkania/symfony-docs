@@ -150,6 +150,7 @@ the current class instance. However, in some cases, such as when using Doctrine
 inheritance mapping, you need to execute the query in a different repository.
 Use this option to define the fully-qualified class name (FQCN) of the Doctrine
 entity associated with the repository you want to use.
+Another case is when validated object is not an entity.
 
 errorPath
 ~~~~~~~~~
