@@ -268,14 +268,20 @@ each with a single field.
 
 
 identifierFieldNames
-~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 **type**: ``array`` | ``string`` [:ref:`default option <validation-default-option>`]
 
-This optional option is the field (or list of fields) of identifier field names  
-that are defined in the entity set by the `entityClass`_ option.  
+Use it only when the validated object is not an entity and you need to update an entity. 
+This option is the identifier field name that is the ``primary key`` or the identifier  
+field names that are ``composite keys`` in the entity set by the `entityClass`_ option.  
   
-Use it only when the checked object is not an entity and you need to update an entity.
+If set, it won’t trigger a uniqueness constraint violation when the only not unique  
+entity identifier(s) value(s) will be matching corresponding value(s) from the   
+validated object.
+If validated object field names do not match the ones from the entity, 
+use key-value mapping; Where ``key`` is the name of the field in the validated object
+and ``value`` is the name of the field in the entity.
 
 .. versionadded:: 5.2
 
