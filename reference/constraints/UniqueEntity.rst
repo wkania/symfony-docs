@@ -152,6 +152,88 @@ Use this option to define the fully-qualified class name (FQCN) of the Doctrine
 entity associated with the repository you want to use.
 Another case is when the validated object is not an entity.
 
+
+Consider this example:
+
+.. configuration-block::
+
+    .. code-block:: php-annotations
+
+        // src/Message/UpdateEmployeeProfile.php
+        namespace App\Message;
+
+        use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+        /**
+         * @UniqueEntity(fields={"name": "username"}, entityClass="App\Entity\User", identifierFieldNames={"uid": "id"})
+         */
+        class UpdateEmployeeProfile
+        {
+            public $uid;
+            public $name;
+
+            public function __construct($uid, $name)
+            {
+                $this->uid = $uid;
+                $this->name = $name;
+            }
+        }
+
+    .. code-block:: yaml
+
+        # config/validator/validation.yaml
+        App\Message\UpdateEmployeeProfile:
+            constraints:
+                - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+                    fields: [name: username]
+                    entityClass: 'App\Entity\User'
+                    identifierFieldNames: [uid: id]
+
+    .. code-block:: xml
+
+        <!-- config/validator/validation.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping https://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+            <class name="App\Message\UpdateEmployeeProfile">
+                <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+                    <option name="fields">
+                        <value key="name" >username</value>
+                    </option>
+                    <option name="entityClass">App\Entity\User</option>
+                    <option name="identifierFieldNames">
+                        <value key="uid" >id</value>
+                    </option>
+                </constraint>
+            </class>
+
+        </constraint-mapping>
+
+    .. code-block:: php
+
+        // src/Message/UpdateEmployeeProfile.php
+        namespace App\Message;
+
+        use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+        use Symfony\Component\Validator\Mapping\ClassMetadata;
+
+        class UpdateEmployeeProfile
+        {
+            public $uid;
+            public $name;
+
+            public static function loadValidatorMetadata(ClassMetadata $metadata)
+            {
+                $metadata->addConstraint(new UniqueEntity([
+                    'fields' => ['name' => 'username'],
+                    'entityClass' => 'App\Entity\User',
+                    'identifierFieldNames' => ['uid' => 'id'],
+                ]));
+            }
+        }
+
 errorPath
 ~~~~~~~~~
 
