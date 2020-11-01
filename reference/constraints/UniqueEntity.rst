@@ -267,7 +267,7 @@ each with a single field.
 
 .. include:: /reference/constraints/_groups-option.rst.inc
 
-If object being validated field name(s) do not match the ones from the entity, 
+If object being validated field name(s) do not match the one(s) from the entity, 
 use key-value mapping; Where ``key`` is the name of the field in the object being 
 validated and ``value`` is the name of the field in the entity.
 Field name(s) mapping only applies when the object being validated is not an entity.
@@ -285,7 +285,7 @@ option.
 If set, it won’t trigger a uniqueness constraint violation when the only not unique  
 entity identifier(s) value(s) will be matching corresponding value(s) from the   
 object being validated.
-If object being validated field name(s) do not match the ones from the entity, 
+If object being validated field name(s) do not match the one(s) from the entity, 
 use key-value mapping; Where ``key`` is the name of the field in the object being 
 validated and ``value`` is the name of the field in the entity.
 
