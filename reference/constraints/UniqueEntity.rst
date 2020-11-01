@@ -12,7 +12,7 @@ using an email address that already exists in the system.
     
 .. versionadded:: 5.2
 
-    Not entity (like DTO) field (or fields) validation against entities persisted in the database, was introduced in Symfony 5.2.
+    Any class instance (like DTO) field (or fields) validation against entities persisted in the database was introduced in Symfony 5.2.
 
 ==========  ===================================================================
 Applies to  :ref:`class <validation-class-target>`
@@ -150,7 +150,7 @@ the current class instance. However, in some cases, such as when using Doctrine
 inheritance mapping, you need to execute the query in a different repository.
 Use this option to define the fully-qualified class name (FQCN) of the Doctrine
 entity associated with the repository you want to use.
-Another case is when the validated object is not an entity.
+Another case is when the object being validated is not an entity.
 
 errorPath
 ~~~~~~~~~
@@ -267,22 +267,27 @@ each with a single field.
 
 .. include:: /reference/constraints/_groups-option.rst.inc
 
+If object being validated field name(s) do not match the ones from the entity, 
+use key-value mapping; Where ``key`` is the name of the field in the object being 
+validated and ``value`` is the name of the field in the entity.
+Field name(s) mapping only applies when the object being validated is not an entity.
 
 identifierFieldNames
 ~~~~~~~~~~~~~~~~~~~~
 
 **type**: ``array`` | ``string`` [:ref:`default option <validation-default-option>`]
 
-Use it only when the validated object is not an entity and you need to update an entity. 
+Use it only when the object being validated is not an entity and you need to update an   
+entity with it. 
 This option is the identifier field name that is the ``primary key`` or the identifier  
-field names that are ``composite keys`` in the entity set by the `entityClass`_ option.  
-  
+field names that are ``composite keys`` in the entity class set by the `entityClass`_ 
+option.  
 If set, it won’t trigger a uniqueness constraint violation when the only not unique  
 entity identifier(s) value(s) will be matching corresponding value(s) from the   
-validated object.
-If validated object field names do not match the ones from the entity, 
-use key-value mapping; Where ``key`` is the name of the field in the validated object
-and ``value`` is the name of the field in the entity.
+object being validated.
+If object being validated field name(s) do not match the ones from the entity, 
+use key-value mapping; Where ``key`` is the name of the field in the object being 
+validated and ``value`` is the name of the field in the entity.
 
 Consider this example:
 
